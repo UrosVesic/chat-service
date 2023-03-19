@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import rs.urosvesic.chatservice.collection.Chat;
 import rs.urosvesic.chatservice.collection.Message;
-import rs.urosvesic.chatservice.controller.InboxChatDto;
 import rs.urosvesic.chatservice.dto.SendMessageRequest;
 import rs.urosvesic.chatservice.service.ChatService;
 import rs.urosvesic.chatservice.util.UserUtil;
@@ -18,11 +17,10 @@ public class MessageRequestMapper implements GenericMapper<SendMessageRequest, M
     private final ChatService chatService;
     @Override
     public Message toEntity(SendMessageRequest dto) {
-        InboxChatDto chat = chatService.getById(dto.getChatId());
         return Message.builder()
                 .content(dto.getContent())
                 .sender(UserUtil.getCurrentUsername())
-                .receiver(chat.getWith())
+                .receiver(dto.getTo())
                 .createdAt(LocalDateTime.now())
                 .build();
     }

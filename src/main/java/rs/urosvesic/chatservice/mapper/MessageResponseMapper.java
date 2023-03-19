@@ -16,8 +16,8 @@ public class MessageResponseMapper implements GenericMapper<MessageResponse, Mes
         PrettyTime p = new PrettyTime();
         return MessageResponse.builder()
                 .content(entity.getContent())
-                .sender(entity.getSender())
-                .receiver(entity.getReceiver())
+                .from(entity.getSender())
+                .to(entity.getReceiver())
                 .time(p.format(entity.getCreatedAt()))
                 .seen(entity.isSeen())
                 .build();

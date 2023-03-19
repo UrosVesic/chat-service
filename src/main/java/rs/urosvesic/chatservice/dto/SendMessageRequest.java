@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SendMessageRequest implements Dto{
 
-    private String chatId;
+    private String to;
     private String content;
 
 }

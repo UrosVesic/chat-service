@@ -14,6 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import rs.urosvesic.chatservice.urls.Urls;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,11 +31,14 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        String[] hasAnyAuthorityEndpoints={Urls.SEND_MESSAGE,Urls.NEW_MESSAGE_COUNT,
+        Urls.SAVE_CHAT,Urls.READ_MESSAGES_FROM_CHAT, Urls.GET_INBOX, Urls.GET_CONVERSATION_BY_PARTICIPANTS};
+
         http.cors().and()
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .antMatchers("/actuator/**")
-                .hasAuthority("user")
+                .antMatchers(hasAnyAuthorityEndpoints)
+                .hasAnyAuthority("user","admin")
                 .anyRequest()
                 .authenticated().and()
                 .oauth2ResourceServer().jwt().jwtAuthenticationConverter(jwtConverter());

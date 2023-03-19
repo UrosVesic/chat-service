@@ -4,10 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
 import rs.urosvesic.chatservice.dto.MessageResponse;
 
 @RequiredArgsConstructor
-//@Component
+@Component
 public class KafkaProducer {
 
     private final KafkaTemplate<String, MessageResponse> kafkaTemplate;

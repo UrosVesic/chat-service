@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rs.urosvesic.chatservice.dto.ConversationDto;
+import rs.urosvesic.chatservice.dto.InboxChatDto;
 import rs.urosvesic.chatservice.dto.MessageResponse;
 import rs.urosvesic.chatservice.service.ChatService;
 
@@ -29,19 +30,15 @@ public class ChatController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    /*@GetMapping
-    private ResponseEntity<List<InboxChatDto>> getAllChats(){
-        List<InboxChatDto> allChats = chatService.getAllChats();
-        return new ResponseEntity<>(allChats, HttpStatus.CREATED);
-    }*/
-
     @GetMapping("/{chatId}/last-message")
     public ResponseEntity<MessageResponse> getLastMessageFromChat(@PathVariable String chatId){
         MessageResponse message = chatService.getLastMessageFromChat(chatId);
         return new ResponseEntity<>(message,HttpStatus.OK);
     }
 
-    @GetMapping
+
+
+    @GetMapping("/inbox")
     private ResponseEntity<List<InboxChatDto>> getInbox(){
         List<InboxChatDto> inbox = chatService.getInbox();
         return new ResponseEntity<>(inbox, HttpStatus.OK);

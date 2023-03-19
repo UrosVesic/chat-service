@@ -13,7 +13,7 @@ import rs.urosvesic.chatservice.util.UserUtil;
 
 @RequiredArgsConstructor
 @Repository
-public class CustomChatRepository {
+public class CustomChatRepository{
 
     private final MongoTemplate template;
 

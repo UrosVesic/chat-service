@@ -3,7 +3,7 @@ package rs.urosvesic.chatservice.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import rs.urosvesic.chatservice.collection.Chat;
-import rs.urosvesic.chatservice.controller.InboxChatDto;
+import rs.urosvesic.chatservice.dto.InboxChatDto;
 import rs.urosvesic.chatservice.dto.ConversationDto;
 import rs.urosvesic.chatservice.dto.MessageResponse;
 import rs.urosvesic.chatservice.mapper.ConversationMapper;
