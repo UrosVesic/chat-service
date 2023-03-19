@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-service
+spec:
+  ports:
+    - port: 8085
+      protocol: TCP
+      targetPort: 8085
+  selector:
+    app: chat-service
+  sessionAffinity: None
+  type: LoadBalancer
