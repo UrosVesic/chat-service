@@ -47,9 +47,9 @@ spec:
                 secretKeyRef:
                   name: chat-db-secret
                   key: PROD_DB_PASSWORD
-            valueFrom:
+            - name: JWT_ISSUER_URI
+              valueFrom:
                 configMapKeyRef:
                   name: auth-config
                   key: JWT_ISSUER_URI
       restartPolicy: Always
----
