@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: chat-service
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: chat-service
+  strategy: 
+    rollingUpdate: 
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template: 
+    metadata: 
+      labels: 
+        app: chat-service
+    spec: 
+      containers: 
+        - image: gcr.io/PROJECT_ID/IMAGE:TAG
+          imagePullPolicy: IfNotPresent
+          name: chat-service
+          env:
+            - name: PROD_DB_HOST
+              valueFrom:
+                configMapKeyRef :
+                  name: chat-db-config
+                  key: PROD_DB_HOST
+            - name: PROD_DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: chat-db-config
+                  key: PROD_DB_NAME
+            - name: PROD_DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: chat-db-config
+                  key: PROD_DB_USERNAME
+            - name: PROD_DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: chat-db-config
+                  key: PROD_DB_PORT
+            - name: PROD_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: chat-db-secret
+                  key: PROD_DB_PASSWORD
+            valueFrom:
+                configMapKeyRef:
+                  name: auth-config
+                  key: JWT_ISSUER_URI
+      restartPolicy: Always
+---
